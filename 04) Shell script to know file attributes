@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -- $(ls -l "$1")
+
+echo "Permissions: $1"
+echo "Owner     : $3"
+echo "Group     : $4"
+echo "Size      : $5 bytes"
+echo "File Name : $9"
+
+# Check if it's a symbolic link
+if [[ $1 == l* ]]; then
+    echo "Link      : Yes"
+else
+    echo "Link      : No"
+fi
