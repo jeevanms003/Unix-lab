@@ -1,0 +1,21 @@
+echo "Enter your choice:"
+echo "1. ps"
+echo "2. echo \$SHELL"
+echo "3. who"
+echo "4. whoami"
+echo "5. date"
+echo "6. echo \$USER"
+echo "7. pwd"
+
+read choice
+
+case $choice in
+    1) ps ;;
+    2) echo "$SHELL" ;;
+    3) who ;;
+    4) whoami ;;
+    5) date ;;
+    6) echo "$USER" ;;
+    7) pwd ;;
+    *) echo "Invalid input" ;;
+esac
