@@ -1,22 +1,14 @@
-#!/bin/bash
-
-echo "Enter file name to save current logins:"
+echo Enter file name
 read file
+who > $file
 
-who > "$file"
-
-echo "Enter user name to check login:"
+echo Enter user name
 read user
+grep -o $user $file
 
-if [ ! -f "$file" ]; then
-    echo "File '$file' not found."
-    exit 1
-fi
-
-grep -w "$user" "$file" > /dev/null
-
-if [ $? -eq 0 ]; then
-    echo "User '$user' is currently logged in."
+if [ $? -eq 0 ]
+then
+  echo "Exists"
 else
-    echo "User '$user' is NOT logged in or username is incorrect."
+  echo "Does not exist"
 fi
