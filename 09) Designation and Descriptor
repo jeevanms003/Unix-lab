@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "Enter dCode:"
+read dCode
+echo "Enter descriptor:"
+read descriptor
+
+if [[ $dCode =~ ^[0-9]+$ ]]
+then
+    if [[ $descriptor =~ ^[a-zA-Z]+$ ]]
+    then
+        echo "$dCode $descriptor added successfully"
+        echo $dCode $descriptor | cat >> desig.lst
+    else
+        echo "$descriptor is not an alphabet string"
+    fi
+else
+    echo "$dCode is not a number"
+fi
+echo ""
+echo "Desig.lst"
+cat desig.lst
