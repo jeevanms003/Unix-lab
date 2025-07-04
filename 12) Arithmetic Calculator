@@ -1,0 +1,59 @@
+#!/bin/bash
+
+while true; do
+    echo "------ Arithmetic Calculator ------"
+    echo "Enter first number:"
+    read a
+    echo "Enter second number:"
+    read b
+
+    echo "Choose operation:"
+    echo "1. Addition (+)"
+    echo "2. Subtraction (-)"
+    echo "3. Multiplication (*)"
+    echo "4. Division (/)"
+    echo "5. Modulus (%)"
+    echo "6. Exit"
+
+    read choice
+
+    case $choice in
+        1)
+            result=$((a + b))
+            echo "Result: $a + $b = $result"
+            ;;
+        2)
+            result=$((a - b))
+            echo "Result: $a - $b = $result"
+            ;;
+        3)
+            result=$((a * b))
+            echo "Result: $a * $b = $result"
+            ;;
+        4)
+            if [ "$b" -ne 0 ]; then
+                result=$(echo "scale=2; $a / $b" | bc)
+                echo "Result: $a / $b = $result"
+            else
+                echo "Error: Division by zero"
+            fi
+            ;;
+        5)
+            if [ "$b" -ne 0 ]; then
+                result=$((a % b))
+                echo "Result: $a % $b = $result"
+            else
+                echo "Error: Division by zero"
+            fi
+            ;;
+        6)
+            echo "Exiting Calculator. Goodbye!"
+            break
+            ;;
+        *)
+            echo "Invalid choice. Please select between 1–6."
+            ;;
+    esac
+
+    echo ""  # Add space between operations
+done
