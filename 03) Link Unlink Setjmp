@@ -13,12 +13,13 @@ void handle_error() {
 int main() {
     const char *filename = "example.txt";
     const char *linkname = "example_link.txt";
-
     FILE *file = fopen(filename, "w");
+
     if (!file) {
         perror("Error creating file");
         return 1;
     }
+
     fprintf(file, "This is an example file.\n");
     fclose(file);
 
@@ -30,7 +31,7 @@ int main() {
     }
 
     if (unlink(linkname) == -1) {
-        perror("Error unlinking file");
+        perror("Error unlinking link");
         return 1;
     } else {
         printf("Link removed: %s\n", linkname);
@@ -38,11 +39,11 @@ int main() {
 
     if (setjmp(buffer) == 0) {
         printf("Setting jump point.\n");
-        handle_error();
+        // You could simulate an error here with: handle_error();
     } else {
         printf("Returned to jump point using longjmp.\n");
     }
 
-    unlink(filename);
+    unlink(filename);  // Final cleanup
     return 0;
 }
