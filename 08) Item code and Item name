@@ -1,0 +1,19 @@
+#!/bin/bash
+while true; do
+    echo "Do you want to add an item? (yes/no):"
+    read answer
+    answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
+
+    if [ "$answer" == "yes" ]; then
+        echo "Enter item code:"
+        read code
+        echo "Enter item name:"
+        read name
+        echo "$code - $name" >> items.txt
+        echo "Item added."
+    elif [ "$answer" == "no" ]; then
+        break
+    else
+        echo "Please enter yes or no."
+    fi
+done
