@@ -1,29 +1,24 @@
 #!/bin/bash
 
-echo "Enter number of units consumed:"
+echo "Enter units consumed"
 read units
 
-# Initialize bill to 0
 bill=0
-
-# Calculate bill based on slabs
-if [ "$units" -le 200 ]; then
+if [ $units -le 200 ]; then
     bill=$(echo "$units * 0.80" | bc)
-elif [ "$units" -le 300 ]; then
+elif [ $units -le 300 ]; then
     bill=$(echo "200 * 0.80 + ($units - 200) * 0.90" | bc)
 else
-    bill=$(echo "200 * 0.80 + 100 * 0.90 + ($units - 300) * 1.00" | bc)
+    bill=$(echo "200 * 0.80 + 100 * 0.90 + ($units - 300) * 1.0" | bc)
 fi
 
-# Add minimum charge (meter charge ₹100)
 bill=$(echo "$bill + 100" | bc)
 
-# Apply 15% surcharge if bill > ₹400
-if (( $(echo "$bill > 400" | bc -l) )); then
-    surcharge=$(echo "$bill * 0.15" | bc)
-    bill=$(echo "$bill + $surcharge" | bc)
-    echo "Surcharge of ₹$surcharge applied."
+if [ "$(echo "$bill > 400" | bc)" -eq 1 ]; then
+    sur=$(echo "$bill * 0.15" | bc)
+    bill=$(echo "$bill + $sur" | bc)
+    echo "Surcharge applied"
 fi
 
-# Final bill display
-echo "Total Electricity Bill: ₹$bill"
+echo "Total bill = $bill"
+
