@@ -1,21 +1,21 @@
 #!/bin/bash
-echo "Enter dCode:"
-read dCode
-echo "Enter descriptor:"
-read descriptor
 
-if [[ $dCode =~ ^[0-9]+$ ]]
-then
-    if [[ $descriptor =~ ^[a-zA-Z]+$ ]]
-    then
-        echo "$dCode $descriptor added successfully"
-        echo $dCode $descriptor | cat >> desig.lst
-    else
-        echo "$descriptor is not an alphabet string"
-    fi
+echo "Enter dcode"
+read dcode
+echo "Enter descriptor"
+read des
+
+if [[ $dcode =~ ^[0-9]+$ ]]; then
+     if [[ $des =~ ^[a-zA-Z]+$ ]]; then
+          echo "$dcode $des added successfully"
+          echo "$dcode $des" >> desig.lst
+     else
+          echo "$des is not alphabetic"
+     fi
 else
-    echo "$dCode is not a number"
+     echo "$dcode is not a digit"
 fi
-echo ""
-echo "Desig.lst"
+
+# Show current file contents
 cat desig.lst
+
