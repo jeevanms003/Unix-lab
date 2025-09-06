@@ -1,27 +1,22 @@
-while read line
-do
-    echo $line > tempo                        # Write current line to temp file "tempo"
-    v=$(cut -d ' ' -f 5 tempo)                # Extract 5th field: salary (v)
-    emp=$(cut -d ' ' -f 2 tempo)              # Extract 2nd field: employee name
+#!/bin/bash
 
-    if echo $v | grep -E -q '^[0-9]+$'        # If salary is numeric
-    then
-        if [ $v -gt 6000 ]                    # If salary > 6000
-        then
-            da=$(( v * 25 / 100 ))            # DA = 25%
+while read line; do
+    sal=$(echo "$line" | cut -d ' ' -f 5)
+    name=$(echo "$line" | cut -d ' ' -f 2)
+
+    da=0   # ❌ Fixed: no spaces around =
+    
+    if echo "$sal" | grep -E -q '^[0-9]+$'; then
+        if [ $sal -gt 6000 ]; then
+            da=$(( sal * 25 / 100 ))
         else
-            da=$(( v * 30 / 100 ))            # DA = 30%
+            da=$(( sal * 30 / 100 ))
         fi
     fi
 
-    hra=$(( v * 10 / 100 ))                   # HRA = 10%
-    gs=$(( v + da + hra ))                    # Gross salary = basic + da + hra
+    hra=$(( sal * 10 / 100 ))
+    gs=$(( sal + da + hra ))   # ✅ Correct arithmetic
 
-    echo
-    echo "Employee name: $emp"
-    echo "Employee salary: $v"
-    echo "Employee da: $da"
-    echo "Employee hra: $hra"
-    echo "Employee gross: $gs"
-    echo
+    echo "Employee name: $name"
+    echo "Employee gross salary: $gs"
 done < empn.lst
