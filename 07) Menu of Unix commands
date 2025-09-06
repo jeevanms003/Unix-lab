@@ -1,21 +1,26 @@
-echo "Enter your choice:"
-echo "1. ps"
-echo "2. echo \$SHELL"
-echo "3. who"
-echo "4. whoami"
-echo "5. date"
-echo "6. echo \$USER"
-echo "7. pwd"
+#!/bin/bash
 
-read choice
-
-case $choice in
-    1) ps ;;
-    2) echo "$SHELL" ;;
-    3) who ;;
-    4) whoami ;;
-    5) date ;;
-    6) echo "$USER" ;;
-    7) pwd ;;
-    *) echo "Invalid input" ;;
-esac
+while true; do
+    echo "Menu"
+    echo "1)ps"
+    echo "2)who"
+    echo "3)whoami"
+    echo "4)pwd"
+    echo "5)shell"
+    echo "6)user"
+    echo "7)date"
+    echo "8)exit"
+    read choice
+    
+    case $choice in
+       1) ps ;;
+       2) who ;;
+       3) whoami ;;
+       4) pwd ;;
+       5) echo "$SHELL" ;;
+       6) echo "$USER" ;;
+       7) date ;;
+       8) break ;;
+       *) echo "Invalid input"
+    esac
+done
